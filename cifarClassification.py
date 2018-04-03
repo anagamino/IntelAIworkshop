@@ -3,6 +3,29 @@ import tensorflow as tf
 
 LOGDIR = "/tmp/IntelAIworkshop/"
 
+
+class TB(tf.keras.callbacks.TensorBoard):
+    def __init__(self, log_every=1, **kwargs):
+        super().__init__(**kwargs)
+        self.log_every = log_every
+        self.counter = 0
+
+    def on_batch_end(self, batch, logs=None):
+        self.counter += 1
+        if self.counter % self.log_every == 0:
+            for name, value in logs.items():
+                if name in ['batch', 'size']:
+                    continue
+                summary = tf.Summary()
+                summary_value = summary.value.add()
+                summary_value.simple_value = value.item()
+                summary_value.tag = name
+                self.writer.add_summary(summary, self.counter)
+            self.writer.flush()
+
+        super().on_batch_end(batch, logs)
+
+
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
 
 # Max scale all the image data
@@ -58,15 +81,15 @@ model.add(Dense(10,
 
 model.compile(loss='categorical_crossentropy',
               optimizer='adam',
-              metrics=['accuracy', 'categorical_crossentropy'])
+              metrics=['accuracy'])
 
-tensorboard = tf.keras.callbacks.TensorBoard(log_dir=LOGDIR,
-                                             histogram_freq=1,
-                                             batch_size=20,
-                                             write_graph=True,
-                                             write_grads=True,
-                                             write_batch_performance=True,
-                                             write_images=True)
+tensorboard = TB(log_dir=LOGDIR,
+                 histogram_freq=1,
+                 batch_size=20,
+                 write_graph=True,
+                 write_grads=True,
+                 write_images=False)
+
 
 print("Initializing the model...")
 # fits the model on batches, waits to send the error back after the number of batches
