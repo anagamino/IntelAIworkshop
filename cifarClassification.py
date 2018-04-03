@@ -2,7 +2,9 @@ from tensorflow.contrib.keras.api.keras.layers import Conv2D, MaxPooling2D, Drop
 import tensorflow as tf
 
 LOGDIR = "/tmp/IntelAIworkshop/"
-
+nbEpochs = int(input('How many epochs of training would you like to run? '))
+batchSize = int(input('How many samples would you like to train on before updating the weights? '))
+modelSave = bool(input('Would you like to save your model after training? Leave blank and press enter if you do not wish to. '))
 
 class TB(tf.keras.callbacks.TensorBoard):
     def __init__(self, log_every=1, **kwargs):
@@ -36,7 +38,7 @@ test_scaled = x_test / x_test.max()
 labels_train = tf.keras.utils.to_categorical(y_train, 10)
 labels_test = tf.keras.utils.to_categorical(y_test, 10)
 
-# Define the model: 2 convolutional layers, 2 max pools
+# Define the model: 4 convolutional layers, 2 max pools
 model = tf.keras.Sequential()
 
 model.add(Conv2D(32, (3, 3), padding='same',
@@ -87,7 +89,7 @@ tensorboard = TB(log_dir=LOGDIR,
                  histogram_freq=1,
                  batch_size=20,
                  write_graph=True,
-                 write_grads=True,
+                 write_grads=False,
                  write_images=False)
 
 
@@ -95,13 +97,15 @@ print("Initializing the model...")
 # fits the model on batches, waits to send the error back after the number of batches
 model.fit(training_scaled,
           labels_train,
-          batch_size=20,
-          epochs=5,
+          batch_size=batchSize,
+          epochs=nbEpochs,
           validation_data=(test_scaled, labels_test),
           verbose=1,
           callbacks=[tensorboard])
 
-model.save('cifarClassification.h5')
+if modelSave:
+    model.save('./cifarClassification.h5')
+
 print('To run tensorboard, open up either Firefox or Chrome and type localhost:6006 in the address bar.')
 print('Then run `tensorboard --logdir=%s` in your terminal to see the results.' % LOGDIR)
 print('Running on mac? If you want to get rid of the dialogue asking to give '
