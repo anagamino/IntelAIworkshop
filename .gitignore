@@ -48,3 +48,6 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+
+# Stuff specific for the current project
+./cifarClassification.h5

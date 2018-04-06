@@ -6,7 +6,9 @@ nbEpochs = int(input('How many epochs of training would you like to run? '))
 batchSize = int(input('How many samples would you like to train on before updating the weights? '))
 modelSave = bool(input('Would you like to save your model after training? Leave blank and press enter if you do not wish to. '))
 
+
 class TB(tf.keras.callbacks.TensorBoard):
+    #  code posted by VladislavZavadskyy at https://github.com/keras-team/keras/issues/6692
     def __init__(self, log_every=1, **kwargs):
         super().__init__(**kwargs)
         self.log_every = log_every
@@ -115,7 +117,6 @@ if modelSave:
     model.save('./cifarClassification.h5')
 
 print('To run tensorboard, open up either Firefox or Chrome and type localhost:6006 in the address bar.')
-print('Then run `tensorboard --logdir=%s` in your terminal to see the results.' % LOGDIR)
-print('Running on mac? If you want to get rid of the dialogue asking to give '
-      'network permissions to TensorBoard, you can provide this flag: '
-      '--host=localhost')
+print('Then run `tensorboard --logdir=%s` in your terminal.' % LOGDIR)
+print('Running on mac? Provide this flag: '
+      '--host=localhost to the previous terminal string.')
