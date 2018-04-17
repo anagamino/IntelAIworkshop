@@ -118,5 +118,5 @@ if modelSave:
 
 print('To run tensorboard, open up either Firefox or Chrome and type localhost:6006 in the address bar.')
 print('Then run `tensorboard --logdir=%s` in your terminal.' % LOGDIR)
-print('Running on mac? Provide this flag: '
+print('If youre on a Mac, provide the following flag: '
       '--host=localhost to the previous terminal string.')

@@ -51,3 +51,5 @@ fabric.properties
 
 # Stuff specific for the current project
 ./cifarClassification.h5
+./logs
+./lowAPI_CNN.py

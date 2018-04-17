@@ -1,8 +1,8 @@
 import numpy as np
-import re
 import tensorflow as tf
 
 tf.logging.set_verbosity(tf.logging.INFO)
+LOGDIR = "/tmp/cifar_classifier"
 
 
 def cnn_model_fn(features, labels, mode):
@@ -124,7 +124,7 @@ def main(unused_argv):
     eval_labels = np.asarray(y_test, dtype=np.int32)
 
     cifar_classifier = tf.estimator.Estimator(
-        model_fn=cnn_model_fn, model_dir="/tmp/cifar_classifier")
+        model_fn=cnn_model_fn, model_dir=LOGDIR)
 
     tensors_to_log = {"probabilities": "softmax_tensor"}
     logging_hook = tf.train.LoggingTensorHook(
@@ -134,8 +134,9 @@ def main(unused_argv):
         x={"x": training_scaled},
         y=train_labels,
         batch_size=32,
-        num_epochs=1,
+        num_epochs=5,
         shuffle=True)
+
     cifar_classifier.train(
         input_fn=train_input_fn,
         hooks=[logging_hook])
@@ -154,3 +155,8 @@ if __name__ == "__main__":
     tf.app.run(
         main=None,
         argv=None)
+
+print('To run tensorboard, open up either Firefox or Chrome and type localhost:6006 in the address bar.')
+print('Then run `tensorboard --logdir=%s` in your terminal.' % LOGDIR)
+print('If youre on a Mac, provide the following flag: '
+      '--host=localhost to the previous terminal string.')
