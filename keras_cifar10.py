@@ -1,7 +1,7 @@
 from tensorflow.contrib.keras.api.keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dense, Activation
 import tensorflow as tf
 
-LOGDIR = "/tmp/IntelAIworkshop/"
+LOGDIR = "./logs/keras_cifar10/"
 nbEpochs = int(input('How many epochs of training would you like to run? '))
 batchSize = int(input('How many samples would you like to train on before updating the weights? '))
 modelSave = bool(input('Would you like to save your model after training? Leave blank and press enter if you do not wish to. '))
