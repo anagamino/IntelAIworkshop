@@ -19,7 +19,26 @@ a virtual environment in the *~/tensorflow* folder. If you are on a laptop,
 you will most likely want to install the *cpu* version of TensorFlow.
 
 In order to install PIL, first activate the TensorFlow virtual environment.
-Then, run *pip install Pillow* in your terminal.
+You can do so by moving to the *~/tensorflow* directory via the terminal then
+typing *source ./bin/activate*.
+Once you have activated your TensorFlow environment,
+run *pip install Pillow* in your terminal.
 
+The current version of this directory contains three primary scripts:
++ keras_cifar10.py
++ keras_cifar10.ipynb
++ tf_cifar10.py
+
+The keras_cifar10.* scripts build and train a multi-layer convolutional
+neural network designed to classify the 10-category version of the cifar dataset.
+These scripts make use of the high-level API [**Keras**](https://keras.io),
+which is included in and serves as a front-end to the TensorFlow API. 
+
+The first two scripts scripts are duplicates of one another except that
+the code is chunked in the .ipynb file to facilitate understanding of what
+each section of code is doing. 
+
+The final script, tf_cifar10.py, builds the same network constructed
+in the Keras scripts, but using a slightly lower-level API. 
 
 The scripts located in this directory have been tested with Python 3.6
