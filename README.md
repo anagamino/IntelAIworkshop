@@ -1,4 +1,4 @@
-# Uconn Intel/IBACs AI Workshop
+# UConn Intel/IBACs AI Workshop
 This is the repo that will be used to store the code used 
 for the Intel / IBACs AI technical workshop hosted at 
 the University of Connecticut.
@@ -6,7 +6,7 @@ the University of Connecticut.
 In order to run the scripts in this directory, you will 
 need python 3.6 and several packages.
 Required packages:
-+ TensorFlow
++ TensorFlow 1.7
 + PIL (via Pillow)
 
 Through downloading and installing TensorFlow you will download 
@@ -42,3 +42,4 @@ The final script, tf_cifar10.py, builds the same network constructed
 in the Keras scripts, but using a slightly lower-level API. 
 
 The scripts located in this directory have been tested with Python 3.6
+and TensorFlow 1.7.
