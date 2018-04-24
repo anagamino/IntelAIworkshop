@@ -53,3 +53,5 @@ fabric.properties
 ./cifarClassification.h5
 ./logs
 ./lowAPI_CNN.py
+./grad_CAMs
+./cat.jpeg

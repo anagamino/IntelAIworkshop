@@ -8,6 +8,7 @@ need python 3.6 and several packages.
 Required packages:
 + TensorFlow 1.7
 + PIL (via Pillow)
++ OpenCV
 
 Through downloading and installing TensorFlow you will download 
 the other packages not listed.
@@ -24,10 +25,14 @@ typing *source ./bin/activate*.
 Once you have activated your TensorFlow environment,
 run *pip install Pillow* in your terminal.
 
-The current version of this directory contains three primary scripts:
+OpenCV may be installed by running *pip install opencv-python* in your
+TensorFlow environment.
+
+The current version of this directory contains four primary scripts:
 + keras_cifar10.py
 + keras_cifar10.ipynb
 + tf_cifar10.py
++ grad_cam.py
 
 The keras_cifar10.* scripts build and train a multi-layer convolutional
 neural network designed to classify the 10-category version of the cifar dataset.
@@ -38,8 +43,14 @@ The first two scripts scripts are duplicates of one another except that
 the code is chunked in the .ipynb file to facilitate understanding of what
 each section of code is doing. 
 
-The final script, tf_cifar10.py, builds the same network constructed
-in the Keras scripts, but using a slightly lower-level API. 
+The tf_cifar10.py script builds the same network constructed
+in the previous scripts, but using a slightly lower-level API. 
+
+The final script, grad_cam.py, creates class activation maps
+for a given input picture. These help you visualize what about the input
+the network uses to make its classification. The gradient class activation
+map provides a course measure of activation, while the guided gradient
+class activation map provied a more fine grain measure of activation.
 
 The scripts located in this directory have been tested with Python 3.6
 and TensorFlow 1.7.
